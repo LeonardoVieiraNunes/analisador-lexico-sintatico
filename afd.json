@@ -1,0 +1,17 @@
+{
+    "estados": ["A","B"],
+    "simbolos_entrada": ["0","1","&"],
+    "estado_inicial": "A",
+    "estados_aceitacao": ["B"],
+    "transicoes": {
+        "A": [
+            ["B","1"],
+            ["A","0"]
+        ],
+        "B": [
+            ["A","1"],
+            ["B","0"]
+        ]
+    }
+
+  }
