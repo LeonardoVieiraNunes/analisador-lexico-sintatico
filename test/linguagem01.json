@@ -1,0 +1,24 @@
+{
+    "finalState": [
+        "B"
+    ],
+    "initialState": [
+        "A"
+    ],
+    "states": [
+        "A",
+        "B"
+    ],
+    "transitions": [
+        {
+            "estado_de_chegada": "B",
+            "estado_de_saida": "A",
+            "simbolo_de_transicao": "A"
+        },
+        {
+            "estado_de_chegada": "B",
+            "estado_de_saida": "A",
+            "simbolo_de_transicao": "C"
+        }
+    ]
+}
