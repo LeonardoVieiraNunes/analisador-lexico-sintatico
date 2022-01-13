@@ -18,7 +18,7 @@
         {
             "estado_de_chegada": "B",
             "estado_de_saida": "A",
-            "simbolo_de_transicao": "C"
+            "simbolo_de_transicao": "F"
         }
     ]
 }

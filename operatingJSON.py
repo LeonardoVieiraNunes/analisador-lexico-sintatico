@@ -13,6 +13,18 @@ with open(path_input) as f:
 for item in data['transitions']:
     print("de " + item['estado_de_saida'] + " para " + item['estado_de_chegada'] + " por " + item['simbolo_de_transicao'])
 
+for item in data['transitions']:
+    if item['simbolo_de_transicao'] == 'C':
+        # how to remove transition
+        data['transitions'].remove(item)
+        # how to add a transition
+        data['transitions'].append({"estado_de_chegada": "B", "estado_de_saida": "A","simbolo_de_transicao": "F"})
+
+print()
+
+for item in data['transitions']:
+    print("de " + item['estado_de_saida'] + " para " + item['estado_de_chegada'] + " por " + item['simbolo_de_transicao'])
+
 # Como declarar um json(so por curiosidade
 # person_dict = {"name": "Bob",
 #                "languages": ["English", "Fench"],
