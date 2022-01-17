@@ -7,7 +7,7 @@ class MyOperatingJSON:
     def __init__(self):
         self.data = {
             "states": [],
-            "initial_state": [],
+            "initial_state": '',
             "final_state": [],
             "transitions": [],
             "symbols": []
@@ -36,7 +36,7 @@ class MyOperatingJSON:
             self.data['states'].remove(state)
 
     def add_initial(self, state: str):
-        self.data['initial_state'].append(state)
+        self.data['initial_state'] = state
 
     def remove_initial(self, state: str):
         if self.data['initial_state'].count(state) > 0:
