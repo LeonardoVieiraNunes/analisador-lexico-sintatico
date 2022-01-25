@@ -60,3 +60,14 @@ def union(afd1: MyOperatingJSON, afd2:MyOperatingJSON):
         new_AFND.add_final(new_state)
 
     return new_AFND
+
+
+if __name__ == "__main__":
+    afd1 = MyOperatingJSON()
+    afd1.load_to_memory('language_01')
+
+    afd2 = MyOperatingJSON()
+    afd2.load_to_memory('language_02')
+
+    union = union(afd1,afd2)
+    union.save_to_disc('union')

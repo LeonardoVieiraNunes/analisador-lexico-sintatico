@@ -2,12 +2,11 @@
     "final_state": [
         "B"
     ],
-    "initial_state": [
-        "A"
-    ],
+    "initial_state": "A",
     "states": [
         "A",
-        "B"
+        "B",
+        "C"
     ],
     "symbols": [
         "A",
@@ -17,7 +16,7 @@
     "transitions": [
         {
             "state_from": "A",
-            "state_to": "B",
+            "state_to": "C",
             "transition_symbol": "A"
         },
         {
