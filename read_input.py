@@ -7,6 +7,7 @@ def next_state(transitions: dict, current_state: str, symbol: str):
     for transition in transitions:
         if current_state == transition['state_from'] and symbol == transition['transition_symbol']:
             return transition['state_to']
+    return "invalid_transition"
 
 
 class MyCheckOfInput:
