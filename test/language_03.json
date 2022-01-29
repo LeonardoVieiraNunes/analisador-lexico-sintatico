@@ -1,0 +1,71 @@
+{
+    "final_state": [
+        "E"
+    ],
+    "initial_state": [
+        "A"
+    ],
+    "states": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+    ],
+    "symbols": [
+      "0",
+      "1"
+    ],
+    "transitions": [
+        {
+            "state_from": "A",
+            "state_to": "B",
+            "transition_symbol": "0"
+        },
+        {
+            "state_from": "A",
+            "state_to": "C",
+            "transition_symbol": "1"
+        },
+        {
+            "state_from": "B",
+            "state_to": "B",
+            "transition_symbol": "0"
+        },
+        {
+            "state_from": "B",
+            "state_to": "D",
+            "transition_symbol": "1"
+        },
+        {
+            "state_from": "C",
+            "state_to": "B",
+            "transition_symbol": "0"
+        },
+        {
+            "state_from": "C",
+            "state_to": "C",
+            "transition_symbol": "1"
+        },
+        {
+            "state_from": "D",
+            "state_to": "B",
+            "transition_symbol": "0"
+        },
+        {
+            "state_from": "D",
+            "state_to": "E",
+            "transition_symbol": "1"
+        },
+        {
+            "state_from": "E",
+            "state_to": "B",
+            "transition_symbol": "0"
+        },
+        {
+            "state_from": "E",
+            "state_to": "C",
+            "transition_symbol": "1"
+        }
+    ]
+}

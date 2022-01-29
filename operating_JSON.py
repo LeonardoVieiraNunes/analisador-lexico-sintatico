@@ -48,11 +48,19 @@ class MyOperatingJSON:
         if self.data['final_state'].count(state) > 0:
             self.data['final_state'].remove(state)
 
-    def get_all_transitions_from_state(self, state:str):
+    def get_all_transitions_from_state(self, state: str):
         transitions = []
         for transition in self.get_transitions():
             if transition['state_from'] == state:
                 transitions.append(transition)
+
+        return transitions
+
+    def get_state_to(self, state: str):
+        transitions = dict()
+        for transition in self.get_transitions():
+            if transition['state_from'] == state:
+                transitions[transition['transition_symbol']] = transition['state_to']
 
         return transitions
 
