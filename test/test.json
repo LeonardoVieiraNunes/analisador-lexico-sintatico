@@ -1,0 +1,50 @@
+{
+    "final_state": [
+        "q0q1q2q3",
+        "q1q2q3",
+        "q2q3"
+    ],
+    "initial_state": "q0q1q2q3",
+    "states": [
+        "q0q1q2q3",
+        "q1q2q3",
+        "q2q3"
+    ],
+    "symbols": [
+        "1",
+        "2",
+        "3"
+    ],
+    "transitions": [
+        {
+            "state_from": "q0q1q2q3",
+            "state_to": "q2q3",
+            "transition_symbol": "3"
+        },
+        {
+            "state_from": "q0q1q2q3",
+            "state_to": "q1q2q3",
+            "transition_symbol": "2"
+        },
+        {
+            "state_from": "q0q1q2q3",
+            "state_to": "q0q1q2q3",
+            "transition_symbol": "1"
+        },
+        {
+            "state_from": "q2q3",
+            "state_to": "q2q3",
+            "transition_symbol": "3"
+        },
+        {
+            "state_from": "q1q2q3",
+            "state_to": "q2q3",
+            "transition_symbol": "3"
+        },
+        {
+            "state_from": "q1q2q3",
+            "state_to": "q1q2q3",
+            "transition_symbol": "2"
+        }
+    ]
+}

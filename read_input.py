@@ -1,4 +1,4 @@
-import operating_JSON
+from operating_JSON import MyOperatingJSON
 
 
 def next_state(transitions: dict, current_state: str, symbol: str):
@@ -13,7 +13,7 @@ def next_state(transitions: dict, current_state: str, symbol: str):
 class MyCheckOfInput:
 
     def __init__(self):
-        self.test_automata = operating_JSON.MyOperatingJSON()
+        self.test_automata = MyOperatingJSON()
 
     def set_dfa(self, file_name: str):
         self.test_automata.load_to_memory(file_name)
