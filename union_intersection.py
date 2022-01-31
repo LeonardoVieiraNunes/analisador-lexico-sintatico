@@ -1,4 +1,7 @@
 from operating_JSON import MyOperatingJSON
+from complement import complement
+from dead_states import find_dead_states
+from unreachable_states import find_unreachable_states
 epsilon = '&'
 
 
@@ -61,6 +64,21 @@ def union(afd1: MyOperatingJSON, afd2:MyOperatingJSON):
 
     return new_AFND
 
+def intersection(afd1: MyOperatingJSON, afd2:MyOperatingJSON):
+    # construir complementos de afds
+    comp1 = complement(afd1)
+    comp2 = complement(afd2)
+    # fazer uniao dos complementos
+    uniao = union(comp1, comp2)
+    # remover estados mortos
+
+    # remover estados incalcancaveis
+
+    # minimizar automato
+    automato_minimizado = uniao
+
+    # realizar complemento do resultado
+    return complement(automato_minimizado)
 
 if __name__ == "__main__":
     afd1 = MyOperatingJSON()
