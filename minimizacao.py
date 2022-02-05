@@ -2,16 +2,19 @@ from operating_JSON import MyOperatingJSON
 from itertools import chain
 
 
-class Minimizacao(MyOperatingJSON):
+class Minimizacao():
     def __init__(self, automato: MyOperatingJSON):
         super(Minimizacao, self).__init__()
         self.tabelaEstados = dict()
+        self.inicial = automato.get_initial()[0]
         self.estados = automato.get_states()
         self.simbolos = automato.get_symbols()
         self.finais = automato.get_final()
         self.repetirMarcacao = False
+        self.estadosOtimizados = []
         self.estadosCombinados = []
-        self.data = automato.data
+        self.automato = automato
+        self.novoAutomato = MyOperatingJSON()
 
     def construirTabelaEstados(self):
         nroTemp = 1
@@ -40,8 +43,8 @@ class Minimizacao(MyOperatingJSON):
         return False
 
     def verificarTransicoes(self, estadoP, estadoQ):
-        statesToP = self.get_state_to(estadoP)
-        statesToQ = self.get_state_to(estadoQ)
+        statesToP = self.automato.get_state_to(estadoP)
+        statesToQ = self.automato.get_state_to(estadoQ)
         for simbolo in self.simbolos:
             stateToP = statesToP[simbolo]
             stateToQ = statesToQ[simbolo]
@@ -59,8 +62,29 @@ class Minimizacao(MyOperatingJSON):
             if not self.repetirMarcacao:
                 break
 
-    def combinarNaoMarcados(self):
-        pass
+    def combinarNaoMarcados(self, head, tail):
+        originalHead = head
+        for item in tail:
+            if head.intersection(item):
+                head = head.union(item)
+                tail.remove(item)
+        if originalHead == head:
+            self.estadosOtimizados.append(head)
+        else:
+            tail.insert(0, head)
+        if len(tail) >= 2:
+            self.combinarNaoMarcados(tail[0], tail[1:])
+        else:
+            self.estadosOtimizados += tail
+
+    def setEstadosNovoAutomato(self):
+        for estadoOtimizado in self.estadosOtimizados:
+            self.novoAutomato.add_state('_'.join(sorted(estadoOtimizado)))
+
+    def preencherNaoCombinados(self):
+        for estado in self.estados:
+            if not list(filter(lambda c: estado in c, self.estadosOtimizados)):
+                self.estadosOtimizados.append({estado})
 
     def gerarNaoMarcados(self):
         for estado in self.tabelaEstados.keys():
@@ -68,7 +92,31 @@ class Minimizacao(MyOperatingJSON):
                 if self.tabelaEstados[estado][i] is None:
                     self.estadosCombinados.append(set(estado + self.estados[i]))
 
-        self.combinarNaoMarcados()
+        self.combinarNaoMarcados(self.estadosCombinados[0], self.estadosCombinados[1:])
+
+    def setTransicoesNovoAutomato(self):
+        for otimizados in self.estadosOtimizados:
+            transitions = self.automato.get_state_to(next(iter(otimizados)))
+            for symbol in self.simbolos:
+                stateTo = next(filter(lambda e: transitions[symbol] in e, self.estadosOtimizados))
+                self.novoAutomato.add_transition('_'.join(sorted(otimizados)), '_'.join(sorted(stateTo)), symbol)
+
+    def setEstadosFinaisNovoAutomato(self):
+        for estado in self.estadosOtimizados:
+            if estado.intersection(self.finais):
+                self.novoAutomato.add_final('_'.join(sorted(estado)))
+
+    def setEstadoInicialNovoAutomato(self):
+        for estado in self.estadosOtimizados:
+            if self.inicial in estado:
+                self.novoAutomato.add_initial('_'.join(sorted(estado)))
+                break
+
+    def setSimbolosNovoAutomato(self):
+        self.novoAutomato.data['symbols'] = self.simbolos
+
+    def salvarNovoAutomato(self):
+        self.novoAutomato.save_to_disc('minimizacao-t1')
 
 if __name__ == "__main__":
     afd = MyOperatingJSON()
@@ -78,4 +126,11 @@ if __name__ == "__main__":
     minimizado.marcarEstados()
     minimizado.verificarNaoMarcados()
     minimizado.gerarNaoMarcados()
+    minimizado.preencherNaoCombinados()
+    minimizado.setEstadosNovoAutomato()
+    minimizado.setTransicoesNovoAutomato()
+    minimizado.setEstadoInicialNovoAutomato()
+    minimizado.setEstadosFinaisNovoAutomato()
+    minimizado.setSimbolosNovoAutomato()
+    minimizado.salvarNovoAutomato()
     print(1)
