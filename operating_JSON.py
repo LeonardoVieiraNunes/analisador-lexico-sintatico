@@ -29,7 +29,8 @@ class MyOperatingJSON:
         return self.data['symbols']
 
     def add_state(self, state: str):
-        self.data['states'].append(state)
+        if state not in self.get_states():
+            self.data['states'].append(state)
 
     def remove_state(self, state: str):
         if self.data['states'].count(state) > 0:
@@ -43,7 +44,8 @@ class MyOperatingJSON:
             self.data['initial_state'].remove(state)
 
     def add_final(self, state: str):
-        self.data['final_state'].append(state)
+        if state not in self.get_final():
+            self.data['final_state'].append(state)
 
     def remove_final(self, state: str):
         if self.data['final_state'].count(state) > 0:
