@@ -5,7 +5,19 @@ class MyDeterminationOfInput:
 
     def __init__(self):
         self.base_automata = MyOperatingJSON()
+        self.base_automata_2 = MyOperatingJSON()
         self.epsilon_transitions = {}
+
+    def union(self, file1: str, file2: str):
+        self.set_automata(file1)
+        self.set_second_automata(file2)
+
+
+
+    def set_second_automata(self, file_name: str):
+        self.base_automata_2.load_to_memory(file_name)
+        self.create_epsilon_transitions()
+        self.create_new_automata()
 
     def set_automata(self, file_name: str):
         self.base_automata.load_to_memory(file_name)
