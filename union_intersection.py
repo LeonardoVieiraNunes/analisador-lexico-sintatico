@@ -164,7 +164,7 @@ class AutomataUnion_intersection:
         # vai para os estados iniciais dos outros automatos por epsilon
         init_state = 'init'
         new_AFND.add_state(init_state)
-        new_AFND.add_initial(init_state)
+        new_AFND.set_initial(init_state)
 
         init_state_af1 = f'{afd1.get_initial()[0]}'
         init_state_af2 = f'{afd2.get_initial()[0]}'

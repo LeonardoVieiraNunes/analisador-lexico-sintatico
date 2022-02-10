@@ -5,24 +5,28 @@ class MyDeterminationOfInput:
 
     def __init__(self):
         self.base_automata = MyOperatingJSON()
-        self.base_automata_2 = MyOperatingJSON()
+        self.temp_automata_1 = MyOperatingJSON()
+        self.temp_automata_2 = MyOperatingJSON()
         self.epsilon_transitions = {}
 
-    def union(self, file1: str, file2: str):
-        self.set_automata(file1)
-        self.set_second_automata(file2)
-
-
-
-    def set_second_automata(self, file_name: str):
-        self.base_automata_2.load_to_memory(file_name)
+    def union(self, final_automata: MyOperatingJSON, afd1: MyOperatingJSON, afd2: MyOperatingJSON):
+        self.base_automata = final_automata
+        self.temp_automata_1 = afd1
+        self.temp_automata_2 = afd2
         self.create_epsilon_transitions()
-        self.create_new_automata()
+        self.create_new_automata('union')
 
-    def set_automata(self, file_name: str):
+    def intersection(self, final_automata: MyOperatingJSON, afd1: MyOperatingJSON, afd2: MyOperatingJSON):
+        self.base_automata = final_automata
+        self.temp_automata_1 = afd1
+        self.temp_automata_2 = afd2
+        self.create_epsilon_transitions()
+        self.create_new_automata('intersection')
+
+    def determination_of_single_automata(self, file_name: str):
         self.base_automata.load_to_memory(file_name)
         self.create_epsilon_transitions()
-        self.create_new_automata()
+        self.create_new_automata('simple')
 
     def create_epsilon_transitions(self):
         transitions = self.base_automata.get_transitions()
@@ -38,7 +42,7 @@ class MyDeterminationOfInput:
                         states_to_check.append(current_transition['state_to'])
             self.epsilon_transitions[state] = epsilon_fecho_of_current_state
 
-    def create_new_automata(self):
+    def create_new_automata(self, operation: str):
         new_states_set_list = [self.epsilon_transitions.__getitem__(self.base_automata.get_initial())]
         new_states_to_check_list = [new_states_set_list[0]]
         new_initial_state = ''.join(sorted(new_states_set_list[0]))
@@ -51,10 +55,21 @@ class MyDeterminationOfInput:
         }
         while len(new_states_to_check_list) != 0:
             current_state_set = new_states_to_check_list.pop(0)
-            for state in current_state_set:
-                if state in self.base_automata.get_final():
-                    temporary_data['final_state'].add(''.join(sorted(current_state_set)))
-                    break
+            if operation == 'simple':
+                for state in current_state_set:
+                    if state in self.base_automata.get_final():
+                        temporary_data['final_state'].add(''.join(sorted(current_state_set)))
+                        break
+            if operation == 'union':
+                for state in current_state_set:
+                    if (state in self.temp_automata_1.get_final()) or (state in self.temp_automata_2.get_final()):
+                        temporary_data['final_state'].add(''.join(sorted(current_state_set)))
+                        break
+            if operation == 'intersection':
+                for state in current_state_set:
+                    if (state in self.temp_automata_1.get_final()) and (state in self.temp_automata_2.get_final()):
+                        temporary_data['final_state'].add(''.join(sorted(current_state_set)))
+                        break
             for symbol in self.base_automata.get_symbols():
                 temp_to_state_set = set()
                 for state in current_state_set:

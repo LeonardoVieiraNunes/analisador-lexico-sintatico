@@ -66,6 +66,10 @@ class MyOperatingJSON:
                                              "state_to": state_to,
                                              "transition_symbol": transition_symbol})
 
+    def add_transition_2(self, transition: dict):
+        if transition not in self.data['transitions']:
+            self.data['transitions'].append(transition)
+
     def remove_transition(self, state_from: str, state_to: str, transition_symbol: str):
         for item in self.data['transitions']:
             if item['state_from'] == state_from and item['state_to'] == state_to and item['transition_symbol'] == transition_symbol:
