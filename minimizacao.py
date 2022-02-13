@@ -1,5 +1,4 @@
 from operating_JSON import MyOperatingJSON
-from itertools import chain
 
 
 class Minimizacao(MyOperatingJSON):
@@ -46,11 +45,12 @@ class Minimizacao(MyOperatingJSON):
         statesToP = self.automato.get_state_to(estadoP)
         statesToQ = self.automato.get_state_to(estadoQ)
         for simbolo in self.simbolos:
-            stateToP = statesToP[simbolo]
-            stateToQ = statesToQ[simbolo]
-            if self.isMarcado(stateToP, stateToQ):
-                self.tabelaEstados[estadoP][self.estados.index(estadoQ)] = 1
-                self.repetirMarcacao = True
+            if simbolo in statesToP and simbolo in statesToQ:
+                stateToP = statesToP[simbolo]
+                stateToQ = statesToQ[simbolo]
+                if self.isMarcado(stateToP, stateToQ):
+                    self.tabelaEstados[estadoP][self.estados.index(estadoQ)] = 1
+                    self.repetirMarcacao = True
 
     def verificarNaoMarcados(self):
         while True:
@@ -90,14 +90,16 @@ class Minimizacao(MyOperatingJSON):
         for estado in self.tabelaEstados.keys():
             for i in range(len(self.tabelaEstados[estado])):
                 if self.tabelaEstados[estado][i] is None:
-                    self.estadosCombinados.append(set(estado + self.estados[i]))
+                    self.estadosCombinados.append({estado, self.estados[i]})
 
         self.combinarNaoMarcados(self.estadosCombinados[0], self.estadosCombinados[1:])
 
     def setTransicoesNovoAutomato(self):
         for otimizados in self.estadosOtimizados:
-            transitions = self.automato.get_state_to(next(iter(otimizados)))
-            for symbol in self.simbolos:
+            transitions = dict()
+            for estado in otimizados:
+                transitions.update(self.automato.get_state_to(estado))
+            for symbol in transitions.keys():
                 stateTo = next(filter(lambda e: transitions[symbol] in e, self.estadosOtimizados))
                 self.new_automata.add_transition('_'.join(sorted(otimizados)), '_'.join(sorted(stateTo)), symbol)
 
