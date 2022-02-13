@@ -2,7 +2,8 @@
 
 #Departamento de Informática e Estatística - INE/CTC
 14 de Fevereiro de 2022
-Relatório de Trabalho de Implementação - INE 5421
+
+Trabalho de Implementação - INE 5421
 
 Integrantes do grupo:
 - Artur Ribeiro Alfa (17103919)
