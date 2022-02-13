@@ -1,6 +1,6 @@
-#Universidade Federal de Santa Catarina
+# Universidade Federal de Santa Catarina
 
-#Departamento de Informática e Estatística - INE/CTC
+# Departamento de Informática e Estatística - INE/CTC
 14 de Fevereiro de 2022
 
 Trabalho de Implementação - INE 5421
