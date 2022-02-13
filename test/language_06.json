@@ -5,24 +5,22 @@
     "initial_state": "A",
     "states": [
         "A",
-        "B",
-        "C"
+        "B"
     ],
     "symbols": [
-        "A",
-        "B",
-        "C"
+      "0",
+      "1"
     ],
     "transitions": [
         {
             "state_from": "A",
-            "state_to": "C",
-            "transition_symbol": "A"
+            "state_to": "A",
+            "transition_symbol": "0"
         },
         {
-            "state_from": "B",
-            "state_to": "A",
-            "transition_symbol": "F"
+            "state_from": "A",
+            "state_to": "B",
+            "transition_symbol": "1"
         }
     ]
 }
