@@ -3,9 +3,10 @@ from determinizacao import MyDeterminationOfInput
 epsilon = '&'
 
 
-class MyUnionIntersection:
+class MyUnionIntersection(MyDeterminationOfInput):
 
     def __init__(self):
+        super().__init__()
         self.final_automata = MyOperatingJSON()
 
     def set_final_automata(self, afd1: MyOperatingJSON, afd2: MyOperatingJSON):
@@ -33,10 +34,8 @@ class MyUnionIntersection:
 
     def make_union(self, afd1: MyOperatingJSON, afd2: MyOperatingJSON):
         self.set_final_automata(afd1, afd2)
-        union_automata = MyDeterminationOfInput()
-        return union_automata.union(self.final_automata, afd1, afd2)
+        return self.union(self.final_automata, afd1, afd2)
 
     def make_intersection(self, afd1: MyOperatingJSON, afd2: MyOperatingJSON):
         self.set_final_automata(afd1, afd2)
-        intersection_automata = MyDeterminationOfInput()
-        return intersection_automata.intersection(self.final_automata, afd1, afd2)
+        return self.intersection(self.final_automata, afd1, afd2)

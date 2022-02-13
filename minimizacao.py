@@ -2,14 +2,14 @@ from operating_JSON import MyOperatingJSON
 from itertools import chain
 
 
-class Minimizacao():
-    def __init__(self, automato: MyOperatingJSON):
+class Minimizacao:
+    def __init__(self, automato=MyOperatingJSON()):
         super(Minimizacao, self).__init__()
         self.tabelaEstados = dict()
-        self.inicial = automato.get_initial()[0]
-        self.estados = automato.get_states()
-        self.simbolos = automato.get_symbols()
-        self.finais = automato.get_final()
+        self.inicial = automato.get_initial()
+        self.estados = list(automato.get_states())
+        self.simbolos = list(automato.get_symbols())
+        self.finais = list(automato.get_final())
         self.repetirMarcacao = False
         self.estadosOtimizados = []
         self.estadosCombinados = []
@@ -109,28 +109,22 @@ class Minimizacao():
     def setEstadoInicialNovoAutomato(self):
         for estado in self.estadosOtimizados:
             if self.inicial in estado:
-                self.novoAutomato.add_initial('_'.join(sorted(estado)))
+                self.novoAutomato.set_initial('_'.join(sorted(estado)))
                 break
 
     def setSimbolosNovoAutomato(self):
         self.novoAutomato.data['symbols'] = self.simbolos
 
-    def salvarNovoAutomato(self):
-        self.novoAutomato.save_to_disc('minimizacao-t1')
+    def minimizar(self, final_automata: MyOperatingJSON):
+        minimizado = Minimizacao(final_automata)
+        minimizado.construirTabelaEstados()
+        minimizado.marcarEstados()
+        minimizado.verificarNaoMarcados()
+        minimizado.gerarNaoMarcados()
+        minimizado.preencherNaoCombinados()
+        minimizado.setEstadosNovoAutomato()
+        minimizado.setTransicoesNovoAutomato()
+        minimizado.setEstadoInicialNovoAutomato()
+        minimizado.setEstadosFinaisNovoAutomato()
+        minimizado.setSimbolosNovoAutomato()
 
-if __name__ == "__main__":
-    afd = MyOperatingJSON()
-    afd.load_to_memory('language_04')
-    minimizado = Minimizacao(afd)
-    minimizado.construirTabelaEstados()
-    minimizado.marcarEstados()
-    minimizado.verificarNaoMarcados()
-    minimizado.gerarNaoMarcados()
-    minimizado.preencherNaoCombinados()
-    minimizado.setEstadosNovoAutomato()
-    minimizado.setTransicoesNovoAutomato()
-    minimizado.setEstadoInicialNovoAutomato()
-    minimizado.setEstadosFinaisNovoAutomato()
-    minimizado.setSimbolosNovoAutomato()
-    minimizado.salvarNovoAutomato()
-    print(1)

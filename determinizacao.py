@@ -1,9 +1,10 @@
 from operating_JSON import MyOperatingJSON
 
 
-class MyDeterminationOfInput:
+class MyDeterminationOfInput(MyOperatingJSON):
 
     def __init__(self):
+        super().__init__()
         self.base_automata = MyOperatingJSON()
         self.temp_automata_1 = MyOperatingJSON()
         self.temp_automata_2 = MyOperatingJSON()
@@ -23,8 +24,8 @@ class MyDeterminationOfInput:
         self.create_epsilon_transitions()
         self.create_new_automata('intersection')
 
-    def determination_of_single_automata(self, file_name: str):
-        self.base_automata.load_to_memory(file_name)
+    def determination_of_single_automata(self, final_automata: MyOperatingJSON):
+        self.base_automata = final_automata
         self.create_epsilon_transitions()
         self.create_new_automata('simple')
 
