@@ -2,7 +2,7 @@ from operating_JSON import MyOperatingJSON
 from itertools import chain
 
 
-class Minimizacao:
+class Minimizacao(MyOperatingJSON):
     def __init__(self, automato=MyOperatingJSON()):
         super(Minimizacao, self).__init__()
         self.tabelaEstados = dict()
@@ -14,7 +14,7 @@ class Minimizacao:
         self.estadosOtimizados = []
         self.estadosCombinados = []
         self.automato = automato
-        self.novoAutomato = MyOperatingJSON()
+        self.new_automata = MyOperatingJSON()
 
     def construirTabelaEstados(self):
         nroTemp = 1
@@ -79,7 +79,7 @@ class Minimizacao:
 
     def setEstadosNovoAutomato(self):
         for estadoOtimizado in self.estadosOtimizados:
-            self.novoAutomato.add_state('_'.join(sorted(estadoOtimizado)))
+            self.new_automata.add_state('_'.join(sorted(estadoOtimizado)))
 
     def preencherNaoCombinados(self):
         for estado in self.estados:
@@ -99,32 +99,31 @@ class Minimizacao:
             transitions = self.automato.get_state_to(next(iter(otimizados)))
             for symbol in self.simbolos:
                 stateTo = next(filter(lambda e: transitions[symbol] in e, self.estadosOtimizados))
-                self.novoAutomato.add_transition('_'.join(sorted(otimizados)), '_'.join(sorted(stateTo)), symbol)
+                self.new_automata.add_transition('_'.join(sorted(otimizados)), '_'.join(sorted(stateTo)), symbol)
 
     def setEstadosFinaisNovoAutomato(self):
         for estado in self.estadosOtimizados:
             if estado.intersection(self.finais):
-                self.novoAutomato.add_final('_'.join(sorted(estado)))
+                self.new_automata.add_final('_'.join(sorted(estado)))
 
     def setEstadoInicialNovoAutomato(self):
         for estado in self.estadosOtimizados:
             if self.inicial in estado:
-                self.novoAutomato.set_initial('_'.join(sorted(estado)))
+                self.new_automata.set_initial('_'.join(sorted(estado)))
                 break
 
     def setSimbolosNovoAutomato(self):
-        self.novoAutomato.data['symbols'] = self.simbolos
+        self.new_automata.data['symbols'] = self.simbolos
 
-    def minimizar(self, final_automata: MyOperatingJSON):
-        minimizado = Minimizacao(final_automata)
-        minimizado.construirTabelaEstados()
-        minimizado.marcarEstados()
-        minimizado.verificarNaoMarcados()
-        minimizado.gerarNaoMarcados()
-        minimizado.preencherNaoCombinados()
-        minimizado.setEstadosNovoAutomato()
-        minimizado.setTransicoesNovoAutomato()
-        minimizado.setEstadoInicialNovoAutomato()
-        minimizado.setEstadosFinaisNovoAutomato()
-        minimizado.setSimbolosNovoAutomato()
+    def minimizar(self):
+        self.construirTabelaEstados()
+        self.marcarEstados()
+        self.verificarNaoMarcados()
+        self.gerarNaoMarcados()
+        self.preencherNaoCombinados()
+        self.setEstadosNovoAutomato()
+        self.setTransicoesNovoAutomato()
+        self.setEstadoInicialNovoAutomato()
+        self.setEstadosFinaisNovoAutomato()
+        self.setSimbolosNovoAutomato()
 

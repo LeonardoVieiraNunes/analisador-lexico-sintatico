@@ -2,9 +2,7 @@
     "final_state": [
         "B"
     ],
-    "initial_state": [
-        "A"
-    ],
+    "initial_state": "A" ,
     "states": [
         "A",
         "B"

@@ -4,9 +4,7 @@
         "D",
         "E"
     ],
-    "initial_state": [
-        "A"
-    ],
+    "initial_state": "A",
     "states": [
         "A",
         "B",

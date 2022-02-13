@@ -85,14 +85,14 @@ class MyOperatingJSON:
                 self.data["transitions"] = load_data["transitions"]
                 self.data["symbols"] = set(load_data["symbols"])
 
-    def save_to_disc(self, file_name: str):
+    def save_to_disc(self, file_name: str, data_to_save: dict):
         path_output = pathlib.Path(pathlib.Path.cwd(), 'test', file_name + '.json')
         save_data = {
-            "states": sorted(self.data["states"]),
-            "initial_state": self.data["initial_state"],
-            "final_state": sorted(self.data["final_state"]),
-            "transitions": self.data["transitions"],
-            "symbols": sorted(self.data["symbols"])
+            "states": sorted(data_to_save["states"]),
+            "initial_state": data_to_save["initial_state"],
+            "final_state": sorted(data_to_save["final_state"]),
+            "transitions": data_to_save["transitions"],
+            "symbols": sorted(data_to_save["symbols"])
         }
         with open(path_output, 'w') as json_file:
             json.dump(save_data, json_file, indent=4, sort_keys=True)

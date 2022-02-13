@@ -52,8 +52,8 @@ if __name__ == "__main__":
                         if input_to_test != 'exit':
                             my_test.test_input(input_to_test)
                 if operation == '3':
-                    my_test = Minimizacao()
-                    my_test.minimizar(my_automata1)
+                    my_test = Minimizacao(my_automata1)
+                    my_test.minimizar()
                 if operation == '4':
                     my_test = MyUnionIntersection()
                     my_test.make_union(my_automata1, my_automata2)
@@ -66,7 +66,6 @@ if __name__ == "__main__":
                     decision = input("Deseja salvar o automato resultante das operações realizadas?(sim,nao)\n")
                     if decision == 'sim':
                         name_to_save = input("Digite o nome que deseja salvar o automato\n")
-                        my_test.data = my_test.base_automata.data
-                        my_test.save_to_disc(name_to_save)
+                        my_test.save_to_disc(name_to_save, my_test.new_automata.data)
             else:
                 print("Por favor repita a operação\n")
