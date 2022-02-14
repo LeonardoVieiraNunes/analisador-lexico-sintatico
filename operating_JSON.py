@@ -43,6 +43,10 @@ class MyOperatingJSON:
     def remove_final(self, state: str):
         self.data['final_state'].discard(state)
 
+    '''
+    retorna todas as transições de um estado
+    se ele for o estado fonte (state_from)
+    '''
     def get_all_transitions_from_state(self, state: str):
         transitions = []
         for transition in self.get_transitions():
@@ -51,6 +55,10 @@ class MyOperatingJSON:
 
         return transitions
 
+    '''
+    retorna um dicionário com chave sendo a transição e o valor
+    o estado destino (state_to) de um estado se ele for o estado fonte (state_from)
+    '''
     def get_state_to(self, state: str):
         transitions = dict()
         for transition in self.get_transitions():
