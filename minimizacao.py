@@ -3,19 +3,19 @@ from determinizacao import MyDeterminationOfInput
 
 
 class Minimizacao(MyOperatingJSON):
-    def __init__(self, automata=MyOperatingJSON()):
+    def __init__(self, automata: MyOperatingJSON()):
         afd = MyDeterminationOfInput()
         afd.determination_of_single_automata(automata)
         super(Minimizacao, self).__init__()
         self.tabelaEstados = dict()
-        self.inicial = afd.get_initial()
-        self.estados = list(afd.get_states())
-        self.simbolos = list(afd.get_symbols())
-        self.finais = list(afd.get_final())
+        self.automato = afd.new_automata
+        self.inicial = self.automato.get_initial()
+        self.estados = list(self.automato.get_states())
+        self.simbolos = list(self.automato.get_symbols())
+        self.finais = list(self.automato.get_final())
         self.repetirMarcacao = False
         self.estadosOtimizados = []
         self.estadosCombinados = []
-        self.automato = afd
         self.new_automata = MyOperatingJSON()
 
     '''
@@ -195,4 +195,3 @@ class Minimizacao(MyOperatingJSON):
                 if self.isMarcado(stateToP, stateToQ):
                     self.tabelaEstados[estadoP][self.estados.index(estadoQ)] = 1
                     self.repetirMarcacao = True
-
