@@ -20,6 +20,11 @@
     "transitions": [
         {
             "state_from": "initq0q1q2q3",
+            "state_to": "q0q1q2q3",
+            "transition_symbol": "1"
+        },
+        {
+            "state_from": "initq0q1q2q3",
             "state_to": "q2q3",
             "transition_symbol": "3"
         },
@@ -29,9 +34,19 @@
             "transition_symbol": "2"
         },
         {
-            "state_from": "initq0q1q2q3",
+            "state_from": "q0q1q2q3",
             "state_to": "q0q1q2q3",
             "transition_symbol": "1"
+        },
+        {
+            "state_from": "q0q1q2q3",
+            "state_to": "q2q3",
+            "transition_symbol": "3"
+        },
+        {
+            "state_from": "q0q1q2q3",
+            "state_to": "q1q2q3",
+            "transition_symbol": "2"
         },
         {
             "state_from": "q2q3",
@@ -47,21 +62,6 @@
             "state_from": "q1q2q3",
             "state_to": "q1q2q3",
             "transition_symbol": "2"
-        },
-        {
-            "state_from": "q0q1q2q3",
-            "state_to": "q2q3",
-            "transition_symbol": "3"
-        },
-        {
-            "state_from": "q0q1q2q3",
-            "state_to": "q1q2q3",
-            "transition_symbol": "2"
-        },
-        {
-            "state_from": "q0q1q2q3",
-            "state_to": "q0q1q2q3",
-            "transition_symbol": "1"
         }
     ]
 }
