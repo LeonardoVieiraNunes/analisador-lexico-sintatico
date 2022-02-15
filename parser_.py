@@ -24,7 +24,6 @@ class Parser:
 
         if self.current_token is not None:
             self.raise_error()
-            print()
 
         return result
 
