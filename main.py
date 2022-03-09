@@ -1,6 +1,8 @@
 import pathlib
 # from pprint import pprint
+from lexer import Lexer
 from operating_JSON import MyOperatingJSON
+from parser_ import Parser
 from read_input import MyCheckOfInput
 from determinizacao import MyDeterminationOfInput
 from simplified_union_intersection import MyUnionIntersection
@@ -60,12 +62,18 @@ if __name__ == "__main__":
                 if operation == '5':
                     my_test = MyUnionIntersection()
                     my_test.make_intersection(my_automata1, my_automata2)
-                # if operation == '6'
-
                 if operation in ['1', '3', '4', '5']:
                     decision = input("Deseja salvar o automato resultante das operações realizadas?(sim,nao)\n")
                     if decision == 'sim':
                         name_to_save = input("Digite o nome que deseja salvar o automato\n")
                         my_test.save_to_disc(name_to_save, my_test.new_automata.data)
-            else:
-                print("Por favor repita a operação\n")
+        elif operation == '6':
+            print('banana')
+            text = input("Digite a expressao regular: ")
+            lexer = Lexer(text)
+            tokens = lexer.generate_tokens()
+            parser = Parser(tokens)
+            tree = parser.parse()
+            print(tree)
+        else:
+            print("Por favor repita a operação\n")

@@ -33,7 +33,7 @@ Uma vez rodando o programa, você pode selecionar uma das operações disponíve
 5. Intersecção de dois automatos
 6. Conversão de ER para AFD
 
-Uma vez selecionada a operação, será pedido que especifique um arquivo json (sem a extensão _.json_) para servir de base para o autômato. Certifique-se do arquivo estar na pasta _test_.
+Uma vez selecionada a operação, será pedido que especifique um arquivo json (digite o nome do arquivo sem a extensão _.json_) para servir de base para o autômato. Certifique-se do arquivo estar na pasta _test_.
 
 Para a conversão de Expressão Regular para AFD, apenas digite a ER no terminal.
 
@@ -50,7 +50,7 @@ Esta classe consiste no objeto que estrutura a quíntupla de um automato finito,
 A determinização deve receber um autômato finito não deterministico e deve retonar um autômato equivalente sem epsilon transições. Para implementar a determinização, além de encapsular o automato de entrada como um objeto da classe MyOperatingJSON, foi utilizado um atributo do tipo dicionário chamado epsilon_transitions, onde a chave corresponde a origem de um estado com epsilon transição e valor para o conjunto de todos os estados alcançáveis por aquele estado via epsilon transição.
 
 ## Reconhecimento de sentenças em AF
-A operação de reconhecimento deve receber uma sentença, um autômato e, retornar se aquela sentença é válida para aquele automato. Não foram utilizadas outras estruturas além da própria estrutura do automato para esta operação.
+A operação de reconhecimento deve receber uma sentença, um autômato (que é determinizado)e, retornar se aquela sentença é válida para aquele automato. Não foram utilizadas outras estruturas além da própria estrutura do automato para esta operação.
 
 ## Minimização de automato finito
 O processo de minimização deve receber um autômato finito (deterministico ou não) que irá retornar um novo autômato equivalente ao anterior com um número mínimo de estados.

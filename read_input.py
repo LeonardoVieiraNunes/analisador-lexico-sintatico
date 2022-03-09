@@ -1,4 +1,5 @@
 from operating_JSON import MyOperatingJSON
+from determinizacao import MyDeterminationOfInput
 
 
 def next_state(transitions: dict, current_state: str, symbol: str):
@@ -13,7 +14,11 @@ def next_state(transitions: dict, current_state: str, symbol: str):
 class MyCheckOfInput:
 
     def __init__(self, final_automata=MyOperatingJSON()):
-        self.test_automata = final_automata
+        automata_d = MyDeterminationOfInput()
+        automata_d.determination_of_single_automata(final_automata)
+        temp_automata = MyOperatingJSON()
+        temp_automata.data = automata_d.new_automata.data
+        self.test_automata = temp_automata
 
     def test_input(self, test_input: str):
         current_state = self.test_automata.get_initial()
