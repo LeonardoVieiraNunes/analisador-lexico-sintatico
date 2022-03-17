@@ -561,10 +561,13 @@ if __name__ == "__main__":
         if operation in ['-1', '1', '2', '3', '4']:
             if operation == "1":
                 removeLeftRecursionOnly()
+                exit(0)
             if operation == "2":
                 removeLeftFactoringOnly()
+                exit(0)
             if operation == "3":
                 LL()
+                exit(0)
             if operation == "4":
                 print("TODO")
         else:
